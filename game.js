@@ -29,6 +29,13 @@ var flower_texture2 = PIXI.Texture.fromImage("flower2.png");
 var tree_trunk_left = new PIXI.Sprite(PIXI.Texture.fromImage("tree1.png"));
 var tree_canopy_left = new PIXI.Sprite(PIXI.Texture.fromImage("tree2.png"));
 
+var bee = new PIXI.Sprite(PIXI.Texture.fromImage("bee.png"));
+bee.anchor.x = 0.5;
+bee.anchor.y = 0.5;
+bee.position.x = Math.round(Math.floor((Math.random()*896)+64)/32)*32;
+bee.position.y = Math.round(Math.floor((Math.random()*736)+64)/32)*32;
+stage.addChild(bee);
+
 
 /*var map = new PIXI.Container();
 map.position.x = 500;
@@ -100,6 +107,29 @@ tree_canopy_left.position.y = 256;
 stage.addChild(tree_canopy_left);
 */
 
+function beeMove()
+{
+    var direction = Math.floor((Math.random()*4)+1);
+    if (direction == 1 && bee.position.y >= 64) // Bee moves up
+    {
+        bee.position.y -= 32;
+    }
+    if (direction == 2 && bee.position.y <= 736) // Bee moves down
+    {
+        bee.position.y += 32;
+    }
+    if (direction == 3 && bee.position.x >= 64) // Bee moves left
+    {
+        bee.position.x -= 32;
+    }
+    if (direction == 4 && bee.position.x <= 896) // Bee moves right
+    {
+        bee.position.x += 32;
+    }
+
+    stage.addChild(bee);
+}
+
 
 var cat = new PIXI.Sprite(texture);
 
@@ -128,6 +158,8 @@ function keydownEventHandler(e)
     {
       cat.position.y -= 32;
     }
+
+    beeMove();
   }
 
   if (e.keyCode == 83) // S Key
@@ -136,6 +168,8 @@ function keydownEventHandler(e)
     {
       cat.position.y += 32;
     }
+
+    beeMove();
   }
 
   if (e.keyCode == 65) // A Key
@@ -152,6 +186,8 @@ function keydownEventHandler(e)
     {
       cat.position.x -= 32;
     }
+
+    beeMove();
   }
 
   if (e.keyCode == 68) // D Key
@@ -168,6 +204,8 @@ function keydownEventHandler(e)
     {
       cat.position.x += 32;
     }
+
+    beeMove();
   }
 
    //Interaction
@@ -202,6 +240,8 @@ function keydownEventHandler(e)
         {
 
         }
+
+        beeMove();
     }
 }
 
